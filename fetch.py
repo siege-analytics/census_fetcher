@@ -14,9 +14,9 @@ if __name__ == '__main__':
     OUTPUT_PATH = ['.', 'downloads', ]
 
     CENSUS_TIGER_URL = 'https://www2.census.gov/geo/tiger/TIGER{census_year}/{geography_code}'
-    CENSUS_YEARS = ['2018', ]
+    CENSUS_YEARS = ['2019', ]
 
-    GEOGRAPHY_CODES = ["TABBLOCK", ]
+    GEOGRAPHY_CODES = ["TABBLOCK","COUNTY", "SLDL", "SLDU", "STATE" ]
 
     # Set up loops to go through and download the files we wan - this could tke a while
     # There's no way to make this more efficient - you have to run everything against everything
