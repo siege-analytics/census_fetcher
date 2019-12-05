@@ -1,31 +1,21 @@
-#!/bin/bash
 
 export PGHOST="localhost"
 export PGUSER="dheerajchand"
-export PGPASSWORD=""
-export PGPORT="5432"
-export PGDATABASE="scratch"
+export PGPASSWORD="dessert"
+export PGPORT="54321"
+export PGDATABASE="gis"
 
 schema="public"
-
 tabblock_projection=4269
 
-SRC_DIR="./downloads"
-TARGET_DIR="./unzipped"
+SOURCE_DIR='./downloads'
+ZIP_DIR="./unzipped"
 
-# for shapefile in $(find unzipped/ -type f -name '*.shp');
-# do
-#   tablename="$(basename "$shapefile" .shp)"
-#   shp2pgsql -d -I -s $tabblock_projection $shapefile $schema.$tablename| psql
-#
-# done
+find -name '*.zip' -exec sh -c 'unzip -u -d "${1%.*}" "$1"' _ {} \;
 
-# This directory has a lot of zipfiles that have to be unzipped and inserted into psql
-
-for sub in $SRC_DIR/*/*;
-do
-  # create an unzip path for the shapefile
-  flam=echo $sub | gcut --complement -d '/' -f 2
-  flam2=echo $flam | gcut -c 1-
-  echo $flam2
-done
+for shapefile in $(find downloads/ -type f -name '*.shp');
+ do
+   tablename="$(basename "$shapefile" .shp)"
+   echo $tablename
+   shp2pgsql -d -I -s $tabblock_projection $shapefile $schema.$tablename| psql
+ done
