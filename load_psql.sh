@@ -1,4 +1,3 @@
-
 export PGHOST="localhost"
 export PGUSER="dheerajchand"
 export PGPASSWORD="dessert"
@@ -11,7 +10,7 @@ tabblock_projection=4269
 SOURCE_DIR='./downloads'
 ZIP_DIR="./unzipped"
 
-find -name '*.zip' -exec sh -c 'unzip -u -d "${1%.*}" "$1"' _ {} \;
+find ./ -name '*.zip' -exec sh -c 'unzip -u -d "${1%.*}" "$1"' _ {} \;
 
 for shapefile in $(find downloads/ -type f -name '*.shp');
  do
