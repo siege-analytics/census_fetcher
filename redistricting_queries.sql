@@ -83,5 +83,50 @@ ON
     plan_cong_all_int_rep
     USING GIST(geom);
 
+-- Get all parts of the districts that aren't contained by the intersecting CD
 
--- GET ALL TAB BLOCKS THAT THE INTERSECTION CONTAINS AND AREAS 
+DROP TABLE IF EXISTS
+    plan_cong_noncntned_int_src;
+
+CREATE TABLE plan_cong_noncntned_int_src AS (
+    SELECT ROW_NUMBER() OVER ()                                              AS pid,
+           plan.gid                                                          AS plan_id,
+           census.gid                                                        as cong_id,
+           plan.district                                                     AS plan_name,
+           census.namelsad                                                   AS cong_name,
+           plan.geom                                                         AS plan_geom,
+           census.geom                                                       AS cong_geom,
+           ST_MULTI(ST_BUFFER(ST_INTERSECTION(plan.geom, census.geom), 0.0)) AS intersection_geom
+    FROM ca_five_districts AS plan
+             INNER JOIN tl_2019_us_cd_116 AS census
+                        ON (ST_INTERSECTS(plan.geom, census.geom))
+    WHERE NOT ST_ISEMPTY(ST_BUFFER(ST_INTERSECTION(plan.geom, census.geom), 0.0)));
+
+CREATE INDEX pln_cong_noncntned_sdx
+    ON
+        plan_cong_noncntned_int_src
+            USING GIST (intersection_geom);
+
+DROP TABLE IF EXISTS plan_cong_noncntned_int_rep;
+
+CREATE TABLE plan_cong_noncntned_int_rep AS
+    (SELECT src.pid AS pid,
+            src.plan_id AS plan_id,
+            src.cong_id AS cong_id,
+            src.plan_name || ' - ' || src.cong_name AS composing_districts,
+            ST_AREA(src.intersection_geom) / ST_AREA(src.plan_geom) AS overlap_ratio_for_plan,
+            ST_AREA(src.intersection_geom) / ST_AREA(src.cong_geom) AS overlap_ratio_for_congress,
+            src.intersection_geom   AS geom
+     FROM plan_cong_noncntned_int_src src);
+
+DROP INDEX IF EXISTS
+    pln_cong_noncntned_rep_sdx;
+
+CREATE INDEX IF NOT EXISTS
+    pln_cong_noncntned_rep_sdx
+ON
+    plan_cong_noncntned_int_rep
+    USING GIST(geom);
+
+
+-- GET ALL TAB BLOCKS THAT THE INTERSECTION CONTAINS AND AREAS
