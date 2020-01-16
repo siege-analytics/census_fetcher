@@ -1,6 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 
-downloads/*
+
 
 
 
@@ -234,5 +234,3 @@ Temporary Items
 tmtags
 
 # downloaded shapefiles
-
-./downloads/*/*.zip
