@@ -2,7 +2,7 @@
 # https://www.linux.com/tutorials/wget-and-downloading-entire-remote-directory/
 
 years=( "2019" )
-geographies=("TABBLOCK" "COUNTY" "SLDL" "SLDU" "STATE" "TRACT" "TTRACT" "ZCTA5")
+geographies=("TABBLOCK" "COUNTY" "SLDL" "SLDU" "STATE" "TRACT" "TTRACT" "ZCTA5" "BG")
 
 LOCAL_PARENT_DIR='downloads'
 APP_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
