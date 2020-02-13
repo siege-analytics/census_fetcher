@@ -136,5 +136,3 @@ SELECT COUNT(*) AS total_count,
        FROM plan_cong_noncntned_int_rep dsjnct, plan_cong_all_int_rep cnjnct
 WHERE dsjnct.composing_districts = cnjnct.composing_districts
 AND st_equals(dsjnct.geom, cnjnct.geom)
-
-SELECT POSTGIS_FULL_VERSION();
