@@ -1,7 +1,7 @@
 # https://stackoverflow.com/questions/5986942/how-to-copy-all-files-via-ftp-in-rsync
 # https://www.linux.com/tutorials/wget-and-downloading-entire-remote-directory/
 
-years=( "2019" )
+years=( "2019" "2018" )
 geographies=("TABBLOCK" "COUNTY" "SLDL" "SLDU" "STATE" "TRACT" "TTRACT" "ZCTA5" "BG")
 
 LOCAL_PARENT_DIR='downloads'
