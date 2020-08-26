@@ -1,0 +1,20 @@
+../
+.git/
+| filter-repo/
+| hooks/
+| info/
+| logs/
+| objects/
+| refs/
+| rr-cache/
+| COMMIT_EDITMSG
+| FETCH_HEAD
+| HEAD
+| MERGE_HEAD
+| MERGE_MODE
+| MERGE_MSG
+| MERGE_RR
+| ORIG_HEAD
+| config
+| index
+| packed-refs
