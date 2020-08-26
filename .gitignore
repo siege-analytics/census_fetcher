@@ -1,13 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 /downloads/**/**/*.*
-
-
-
-
-
-
-
+/downloads/*/*/*.*
+/downloads/**/**/
+downloads/*/*
 
 ### Python template
 # Byte-compiled / optimized / DLL files
