@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  postgis:
+    image: postgis/postgis
+    environment:
+      - POSTGRES_DB=gis
+      - POSTGRES_PASSWORD=dessert
+      - POSTGRES_USER=dheerajchand
+    ports:
+      - 54321:5432
+    volumes:
+      - pg_data:/var/lib/postgresql
+    restart: always
